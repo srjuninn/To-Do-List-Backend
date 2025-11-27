@@ -16,8 +16,6 @@ public class TaskDTO {
 	@NotBlank
 	@NotNull
 	private String description;
-	@NotBlank
-	@NotNull
 	private Status status;
 	private LocalDate beginDate;
 	@Future
