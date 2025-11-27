@@ -1,5 +1,8 @@
 package com.List.ToDo.service;
 
+import java.util.List;
+import java.util.Optional;
+
 import org.springframework.stereotype.Service;
 
 import com.List.ToDo.dto.TaskDTO;
@@ -29,4 +32,11 @@ public class TaskService {
 		}
 	}
 
+	public List<TaskEntity> showTasks() {
+		return taskRepository.findAll();
+	}
+
+	public Optional<TaskEntity> showTasksById(Long id) {
+		return taskRepository.findById(id);
+	}
 }
