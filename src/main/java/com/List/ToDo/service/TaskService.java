@@ -16,8 +16,17 @@ public class TaskService {
 	}
 
 	public void createTask(TaskDTO dto) {
-
 		TaskEntity task = new TaskEntity(dto);
 		taskRepository.save(task);
 	}
+
+	public String deleteTask(Long id) {
+		if (taskRepository.existsById(id)) {
+			taskRepository.deleteById(id);
+			return "tarefa excluida com sucesso!";
+		} else {
+			return "Essa tarefa não existe";
+		}
+	}
+
 }
