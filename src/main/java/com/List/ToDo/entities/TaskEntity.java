@@ -4,12 +4,7 @@ import java.time.LocalDate;
 
 import com.List.ToDo.dto.TaskDTO;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 @Entity
 @Table(name = "task")
@@ -98,4 +93,7 @@ public class TaskEntity {
 		this.beginDate = LocalDate.now();
 	}
 
+	@ManyToOne
+	@JoinColumn(name = "user_id")
+	private UserEntity user;
 }
