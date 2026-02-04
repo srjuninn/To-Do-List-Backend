@@ -2,15 +2,13 @@ package com.List.ToDo.entities;
 
 import com.List.ToDo.dto.UserDTO;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
-@Table(name = "user")
+@Table(name = "users")
 //	Atributes
 public class UserEntity {
 	@Id
@@ -69,4 +67,6 @@ public class UserEntity {
 		this.password = dto.getPassword();
 	}
 
+	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+	List<TaskEntity> tasks = new ArrayList<>();
 }
