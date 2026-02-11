@@ -25,29 +25,29 @@ public class TaskController {
     }
 
     //	Creating task
-    @PostMapping("/user/{userId}")
+    @PostMapping("/create/forUser/{userId}")
     public ResponseEntity<?> createTask(@PathVariable Long userId, @Valid @RequestBody TaskDTO dto) {
         try {
             TaskEntity task = taskService.createTask(userId, dto);
-            return ResponseEntity.ok(task);
+            return ResponseEntity.ok("Criado com sucesso");
         } catch (RuntimeException e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Erro, não é permitido criar uma task sem usuário");
         }
     }
 
-    @GetMapping("/show/{userId}")
+    @GetMapping("/show/user/{userId}")
     public ResponseEntity<List<TaskEntity>> getTasksByUser(@PathVariable Long userId) {
         return ResponseEntity.ok(taskService.getTasksByUser(userId));
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/update/id/{id}")
     public ResponseEntity<TaskEntity> updateTask(@PathVariable Long id, @Valid @RequestBody TaskDTO dto) {
         TaskEntity updated = taskService.updateTask(id, dto);
         return ResponseEntity.ok(updated);
     }
 
     //	Deleting task
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/deleteTask/{id}")
     public ResponseEntity<String> deleteTask(@PathVariable Long id) {
         taskService.deleteTask(id);
         return ResponseEntity.ok("Tarefa deletada com sucesso!");

@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import com.List.ToDo.entities.UserEntity;
 import com.List.ToDo.repositories.UserRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
 import com.List.ToDo.dto.TaskDTO;
@@ -22,6 +23,7 @@ public class TaskService {
         this.userRepository = userRepository;
     }
 
+    @Transactional
     public TaskEntity createTask(Long userId, TaskDTO dto) {
         UserEntity user = userRepository.findById(userId).orElseThrow(() -> new RuntimeException("Usuário não encontrado"));
         TaskEntity task = new TaskEntity(dto);
