@@ -1,5 +1,7 @@
 package com.List.ToDo.service;
 
+import com.List.ToDo.dto.TaskDTO;
+import com.List.ToDo.entities.TaskEntity;
 import org.springframework.stereotype.Service;
 
 import com.List.ToDo.dto.UserDTO;
@@ -35,7 +37,8 @@ public class UserService {
         Optional<UserEntity> userEntityOptional = userRepository.findById(id);
         if (userEntityOptional.isPresent()) {
             UserEntity user = userEntityOptional.get();
-            return new UserDTO(user.getName(), user.getEmail());
+            List<String> taskNames  = user.getTasks().stream().map(TaskEntity::getName).toList();
+            return new UserDTO(user.getName(), user.getEmail(), taskNames);
         } else {
             return null;
         }

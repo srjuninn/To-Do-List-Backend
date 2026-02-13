@@ -32,8 +32,14 @@ public class UserController {
     }
 
     @GetMapping("list/id/{id}")
-    public UserDTO getUserById(@PathVariable Long id) {
-        return userService.getUserById(id);
+    public ResponseEntity<UserDTO> getUserById(@PathVariable Long id) {
+        UserDTO user = userService.getUserById(id);
+        if (user != null){
+            return ResponseEntity.ok(user);
+        }else{
+            return ResponseEntity.notFound().build();
+        }
+//        return userService.getUserById(id);
     }
 
     @DeleteMapping("delete/id/{id}")
